@@ -771,6 +771,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1252345068}
   offset: {x: 0, y: 1, z: -5}
+--- !u!1 &964047451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1370994378107291618, guid: 80b14d13b26bffb4cb415b633f0433a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1535323179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &964047457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964047451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b48980954b503488447a0fbba52d56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 1
+  target: {fileID: 1252345068}
 --- !u!1 &1199813538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1252345064}
-  forwardForce: 6000
+  forwardForce: 1
   sidewaysForce: 120
 --- !u!114 &1252345070
 MonoBehaviour:

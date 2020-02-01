@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody rb;
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
+    GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        // rb.AddForce(0, 200, 500);
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -19,13 +20,26 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.AddForce(0, 0, forwardForce * Time.deltaTime);
 
-        if ( Input.GetKey("d") )
+        if ( Input.GetKey("d") ) // MOVE RIGHT
         {
-            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            ////////////////////////////////////////////////////////////////////////////
+            // --- IMPLEMENTING THE COMMAND PATTERN - START HERE ---
+            // instead of just calling addforce, we want to package this up as a command
+            // and send to an invoker
+            // we'll need a command class, some commands, and an invoker...
+            //rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            Command moveRight = new MoveRight(rb, sidewaysForce);
+            Invoker invoker = new Invoker();
+            invoker.SetCommand(moveRight);
+            invoker.ExecuteCommand();
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a")) // MOVE LEFT
         {
-            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            //rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            Command moveLeft = new MoveLeft(rb, sidewaysForce);
+            Invoker invoker = new Invoker();
+            invoker.SetCommand(moveLeft);
+            invoker.ExecuteCommand();
         }
 
         if (rb.position.y < -1f)

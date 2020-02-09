@@ -11,6 +11,16 @@ public class GameManager : MonoBehaviour
     GameObject player;
     float replayStartTime;
 
+    private void OnEnable()
+    {
+        PlayerCollision.OnHitObstacle += EndGame;
+    }
+
+    private void OnDisable()
+    {
+        PlayerCollision.OnHitObstacle -= EndGame;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +48,17 @@ public class GameManager : MonoBehaviour
         completeLevelUI.SetActive(true);
     }
 
-    public void EndGame()
+    public void EndGame(Collision collisionInfo)
     {
+        player.GetComponent<PlayerMovement>().enabled = false;
+        PlayerCollision.OnHitObstacle -= EndGame;
+
+        if (collisionInfo != null)
+        {
+            Debug.Log("Hit: " + collisionInfo.collider.name);
+        }
+
+        // this flag prevents responding to multiple hit events:
         if (!gameHasEnded)
         {
             gameHasEnded = true;

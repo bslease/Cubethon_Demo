@@ -6,10 +6,13 @@ public class PlayerCollision : MonoBehaviour
 {
     public PlayerMovement movement;
 
+    public delegate void HitObstacle(Collision collisionInfo);
+    public static event HitObstacle OnHitObstacle;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,8 +26,13 @@ public class PlayerCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Obstacle")
         {
             //Debug.Log("We hit an obstacle!");
-            movement.enabled = false;
-            FindObjectOfType<GameManager>().EndGame();
+            if (OnHitObstacle != null)
+            {
+                OnHitObstacle(collisionInfo);
+            }
+            //movement.enabled = false;
+            //FindObjectOfType<GameManager>().EndGame();
         }
     }
+
 }

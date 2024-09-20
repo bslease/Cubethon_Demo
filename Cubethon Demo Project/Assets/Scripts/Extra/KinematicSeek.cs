@@ -23,7 +23,7 @@ public class KinematicSeek : MonoBehaviour
         SteeringOutput result = new SteeringOutput();
 
         // Get the direction to the target
-        result.linearVelocity = target.position - this.transform.position;
+        result.linearVelocity = -target.position + this.transform.position;
 
         // Set velocity to be along this direction at maxspeed
         result.linearVelocity = result.linearVelocity.normalized * maxSpeed;
